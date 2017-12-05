@@ -30,9 +30,10 @@ class App extends Component {
   }
 
   getVehicles() {
-    axios.get('https://joes-autos.herokuapp.com/api/vehicles').then((response) => {
+    axios.get('https://joes-autos.herokuapp.com/api/vehicles').then((resp) => {
+      // console.log(resp)
       this.setState({
-        vehiclesToDisplay : response.data
+        vehiclesToDisplay : resp.data
       })
     }).catch(err => {
       console.log(err)
@@ -58,7 +59,14 @@ class App extends Component {
 
   filterByColor() {
     let color = this.refs.selectedColor.value;
-    // axios (GET)
+    axios.get(`https://joes-autos.herokuapp.com/api/vehicles?color=${color}`).then((resp) => {
+      console.log(resp.data)
+      this.setState({
+        vehiclesToDisplay: resp.data
+      })
+    }).catch(err => {
+      console.log(err)
+    })
     // setState with response -> vehiclesToDisplay
   }
 
