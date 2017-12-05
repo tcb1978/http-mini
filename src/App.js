@@ -105,7 +105,14 @@ nameSearch() {
 
 byYear() {
   let year = this.refs.searchYear.value;
-  // axios (GET)
+  axios.get(`https://joes-autos.herokuapp.com/api/vehicles?year=${year}`).then((resp) => {
+    console.log(resp.data)
+    this.setState({
+      vehiclesToDisplay: resp.data
+    })
+  }).catch(err => {
+    console.log(err)
+  })
   // setState with response -> vehiclesToDisplay
 }
 
