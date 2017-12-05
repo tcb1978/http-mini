@@ -53,7 +53,14 @@ class App extends Component {
 
   filterByMake() {
     let make = this.refs.selectedMake.value
-    // axios (GET)
+    axios.get(`https://joes-autos.herokuapp.com/api/vehicles?make=${make}`).then((resp) => {
+      console.log(resp.data)
+      this.setState({
+        vehiclesToDisplay: resp.data
+      })
+    }).catch(err => {
+      console.log(err)
+    })
     // setState with response -> vehiclesToDisplay
   }
 
@@ -83,7 +90,12 @@ class App extends Component {
     year: this.refs.year.value,
     price: this.refs.price.value
   }  
-  // axios (POST)
+    axios.post('https://joes-autos.herokuapp.com/api/vehicles', newCar).then(resp => {
+      console.log(resp.data.vehicles);
+      this.setState({
+        vehiclesToDisplay: resp.data.vehicles
+      })
+    })
   // setState with response -> vehiclesToDisplay
 }
 
