@@ -30,7 +30,13 @@ class App extends Component {
   }
 
   getVehicles() {
-    // axios (GET)
+    axios.get('https://joes-autos.herokuapp.com/api/vehicles').then((response) => {
+      this.setState({
+        vehiclesToDisplay : response.data
+      })
+    }).catch(err => {
+      console.log(err)
+    })
     // setState with response -> vehiclesToDisplay
   }
 
